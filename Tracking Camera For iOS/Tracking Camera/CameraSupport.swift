@@ -6,13 +6,14 @@
 //
 
 import AVFoundation
+import Vision
 
 class CameraSupport:NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate{
     let session = AVCaptureSession()
-    
+    @Published var observations=[VNFaceObservation]()
     private func setupCamera() {
         session.sessionPreset = .photo
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
               let input = try? AVCaptureDeviceInput(device: device),
               session.canAddInput(input),
               let output = createOutput() else {
@@ -35,3 +36,5 @@ class CameraSupport:NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     }
     
 }
+
+
