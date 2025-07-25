@@ -20,7 +20,13 @@ extension CameraSupport{
             }
             
             guard let observations = request.results as? [VNFaceObservation] else { return }
-            self.observations=observations
+            guard let observation=observations.max(by: {
+                $0.boundingBox.height<$1.boundingBox.height
+            }) else{return}
+            Task{
+                self.observation=observation
+            }
+            
             
             
         }

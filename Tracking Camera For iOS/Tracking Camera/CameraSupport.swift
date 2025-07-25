@@ -7,10 +7,11 @@
 
 import AVFoundation
 import Vision
+import SwiftUI
 
 class CameraSupport:NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate{
     let session = AVCaptureSession()
-    @Published var observations=[VNFaceObservation]()
+    @Published var observation=VNFaceObservation()
     private func setupCamera() {
         session.sessionPreset = .photo
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
@@ -32,9 +33,46 @@ class CameraSupport:NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     override init() {
         super.init()
         setupCamera()
-        self.session.startRunning()
+        Task{
+            self.session.startRunning()
+        }
     }
     
 }
 
+
+extension CameraView{
+    
+    
+     func getRotationAngle() -> Angle {
+            switch orientation {
+            case .landscapeLeft:
+                return .degrees(-90)
+            case .landscapeRight:
+                return .degrees(90)
+//            case .portraitUpsideDown:
+//                return .degrees(180)
+            default:
+                return .degrees(0)
+            }
+        }
+        
+         func getXOffset(geometry: GeometryProxy) -> CGFloat {
+            switch orientation {
+            case .landscapeLeft,.landscapeRight:
+                return max(geometry.size.width, geometry.size.height)/2
+            default:
+                return min(geometry.size.width, geometry.size.height)/2
+            }
+        }
+        
+         func getYOffset(geometry: GeometryProxy) -> CGFloat {
+            switch orientation {
+            case .landscapeLeft, .landscapeRight:
+                return min(geometry.size.width, geometry.size.height)/2
+            default:
+                return max(geometry.size.width, geometry.size.height)/2
+            }
+        }
+}
 
