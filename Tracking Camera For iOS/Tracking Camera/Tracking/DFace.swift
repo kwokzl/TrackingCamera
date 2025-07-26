@@ -23,11 +23,9 @@ extension CameraSupport{
             guard let observation=observations.max(by: {
                 $0.boundingBox.height<$1.boundingBox.height
             }) else{return}
-            DispatchQueue.main.async{
+            Task{
                 self.observation=observation
             }
-                
-            
             
             
             
