@@ -1,0 +1,61 @@
+T611C 006:845.854   SEGGER J-Link V6.70e Log File
+T611C 006:845.976   DLL Compiled: Apr 17 2020 17:55:05
+T611C 006:845.989   Logging started @ 2025-07-26 06:02
+T611C 006:846.001 JLINK_SetWarnOutHandler(...)
+T611C 006:846.014 - 0.018ms
+T611C 006:846.030 JLINK_OpenEx(...)
+T611C 006:846.636   
+  ***** Error: 
+T611C 006:846.663   Cannot connect to J-Link.
+T611C 006:876.091 - 30.089ms returns "Cannot connect to J-Link."
+T611C 006:876.405 
+  ***** 
+T611C 006:876.436 API Error: API JLINK_GetHardwareVersion function called before JLINKARM_Open()
+T611C 017:136.796 JLINK_IsOpen()
+T611C 017:136.846 - 0.056ms returns 0x00
+T611C 017:136.859 JLINK_EMU_SelectByUSBSN(SerialNo = 0)
+T611C 017:137.315 - 0.470ms returns 0xFFFFFFFF
+T611C 017:145.990 JLINK_EnableLog(...)
+T611C 017:145.997 - 0.009ms
+T611C 017:146.003 JLINK_SetWarnOutHandler(...)
+T611C 017:146.007 - 0.006ms
+T611C 017:146.012 JLINK_OpenEx(...)
+T611C 017:165.139 - 19.142ms returns "Failed to open DLL"
+T611C 017:165.556 
+  ***** 
+T611C 017:165.573 API Error: API JLINK_GetHardwareVersion function called before JLINKARM_Open()
+T611C 024:024.063 JLINK_IsOpen()
+T611C 024:024.081 - 0.019ms returns 0x00
+T611C 024:024.086   JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000010) 
+T611C 024:024.618 - 0.540ms returns 0x00
+T611C 028:197.342 JLINK_IsOpen()
+T611C 028:197.372 - 0.032ms returns 0x00
+T611C 028:197.378 JLINK_SelectIP(Host = "127.0.0.1", Port = 0)
+T611C 028:197.443 - 0.068ms returns 0x00
+T611C 028:197.510 JLINK_OpenEx(...)
+T611C 029:717.043 - 1519.544ms returns "Failed to open DLL"
+T611C 029:717.066 JLINK_IsOpen()
+T611C 029:717.070 - 0.005ms returns 0x00
+T611C 029:717.075 JLINK_SelectIP(Host = "127.0.0.1", Port = 0)
+T611C 029:717.102 - 0.028ms returns 0x00
+T611C 029:717.156 JLINK_EnableLog(...)
+T611C 029:717.161 - 0.006ms
+T611C 029:717.167 JLINK_SetWarnOutHandler(...)
+T611C 029:717.171 - 0.005ms
+T611C 029:717.177 JLINK_OpenEx(...)
+T611C 031:235.202 - 1518.039ms returns "Failed to open DLL"
+T611C 031:235.747 
+  ***** 
+T611C 031:235.763 API Error: API JLINK_GetHardwareVersion function called before JLINKARM_Open()
+T611C 032:772.005 JLINK_IsOpen()
+T611C 032:772.028 - 0.025ms returns 0x00
+T611C 032:772.035   JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000010) 
+T611C 032:772.531 - 0.505ms returns 0x00
+T611C 039:688.578 JLINK_IsOpen()
+T611C 039:688.600 - 0.024ms returns 0x00
+T611C 039:688.606   JLINK_EMU_GetList(InterfaceMask = 0x00000001, MaxInfos = 0x00000010) 
+T611C 039:689.047 - 0.449ms returns 0x00
+T611C 042:045.402 JLINK_Close()
+T611C 042:045.586 - 0.186ms
+T611C 042:045.591   
+T611C 042:045.595   Closed
