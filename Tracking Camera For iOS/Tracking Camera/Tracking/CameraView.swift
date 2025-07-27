@@ -9,11 +9,12 @@ import SwiftUI
 import AVFoundation
 
 struct CameraView: View {
-    @ObservedObject var avSupport=AppSupport.cameraSupport
+    @StateObject var avSupport=AppSupport.cameraSupport
     @State var hstate=""
     @State var orientation: UIDeviceOrientation = .portrait
     @State var xOffset:CGFloat=0
     @State var yOffset:CGFloat=0
+    @State var showSaveButton = false
     var body: some View {
         GeometryReader{geometry in
             
@@ -23,13 +24,13 @@ struct CameraView: View {
             ZStack(/*alignment:.topLeading*/){
                 CameraDisplayer(avCaptureSession: avSupport.session)
 //                    .ignoresSafeArea()
-                    .frame(width: min(geometry.size.width, geometry.size.height),
-                           height: max(geometry.size.width, geometry.size.height))
-                    .rotationEffect(getRotationAngle())
-                    .offset(x: xOffset,
-                            y: yOffset)
-                    .position(x: 0,
-                              y: 0)
+//                    .frame(width: min(geometry.size.width, geometry.size.height),
+//                           height: max(geometry.size.width, geometry.size.height))
+//                    .rotationEffect(getRotationAngle())
+//                    .offset(x: xOffset,
+//                            y: yOffset)
+//                    .position(x: 0,
+//                              y: 0)
                     .ignoresSafeArea()
                 
                 
@@ -47,7 +48,23 @@ struct CameraView: View {
                         
 //                        Text(String(format: "距离：%.1f", distance))
 //                        Text("坐标：x=\(maxFace.boundingBox.origin.x), y=\(maxFace.boundingBox.origin.y)")
-                        Text(hstate)
+                        
+                        Button(action:{
+                            if avSupport.isRecording{
+                                avSupport.stopRecording()
+                                showSaveButton = true
+                            }else{
+                                avSupport.startRecording()
+                            }
+                        }){
+                            Image(systemName: avSupport.isRecording ? "pause.circle" : "play.circle.fill")
+                                .font(.system(size: 50))
+                                .foregroundStyle(avSupport.isRecording ? .red : .white)
+                                .padding(2)
+                                .background(.bar,in: .circle)
+                        }
+                        
+                        
                         
                         
                         
@@ -57,7 +74,7 @@ struct CameraView: View {
                         
                     }
                     .padding()
-                    .background(.bar,in: .rect(cornerRadius: 10))
+//                    .background(.bar,in: .rect(cornerRadius: 10))
                     
                     
                     
@@ -82,6 +99,9 @@ struct CameraView: View {
 //                                cameraModel.updatePreviewOrientation()
                             }
                             orientation = UIDevice.current.orientation
+                Task{
+                    await CameraSupport.checkPermissions()
+                }
             }
             .onChange(of:orientation){
                 xOffset=getXOffset(geometry: geometry)
@@ -92,6 +112,11 @@ struct CameraView: View {
             }
             .onChange(of: AppSupport.state){
                 hstate=AppSupport.state.rawValue
+            }
+            .onChange(of: avSupport.isRecording){
+                if avSupport.isRecording==false{
+                    avSupport.saveVideoToPhotos()
+                }
             }
         }
     }
