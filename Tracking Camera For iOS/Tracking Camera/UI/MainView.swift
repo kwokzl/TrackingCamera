@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab = 0
-    
+    @Binding var selection:Int
     var body: some View {
         ZStack(alignment: .bottom) {
             // 主内容区
@@ -52,6 +52,7 @@ struct MainView: View {
                         // 快速开始跟踪按钮
                         Button(action: {
                             // 跳转到跟踪拍摄页面
+                            
                         }) {
                             HStack {
                                 Image(systemName: "camera.fill")
@@ -84,7 +85,9 @@ struct MainView: View {
                                 
                                 Spacer()
                                 
-                                Button(action: {}) {
+                                Button(action: {
+                                    selection=1
+                                }) {
                                     Text("查看全部")
                                         .font(.subheadline)
                                         .foregroundColor(Color.yellow)
@@ -130,7 +133,7 @@ struct MainView: View {
                                 
                                 Spacer()
                                 
-                                Button(action: {}) {
+                                NavigationLink(destination:{CommunityView()}){
                                     Text("更多")
                                         .font(.subheadline)
                                         .foregroundColor(Color.yellow)
@@ -274,33 +277,33 @@ struct MainView: View {
             )
             
             // 底部导航栏
-            HStack(spacing: 0) {
-                ForEach(0..<5) { index in
-                    Button(action: {
-                        selectedTab = index
-                    }) {
-                        VStack(spacing: 4) {
-                            Image(systemName: getTabIcon(for: index))
-                                .font(.system(size: 20))
-                            
-                            Text(getTabTitle(for: index))
-                                .font(.caption2)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .foregroundColor(selectedTab == index ? Color.yellow : Color.secondary)
-                    }
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 24)
-            .background(
-                RoundedRectangle(cornerRadius: 24)
-                    .fill(Color(UIColor.systemBackground))
-                    .shadow(color: Color.black.opacity(0.1), radius: 12, x: 0, y: -4)
-            )
-            .offset(y: -8)
+//            HStack(spacing: 0) {
+//                ForEach(0..<5) { index in
+//                    Button(action: {
+//                        selectedTab = index
+//                    }) {
+//                        VStack(spacing: 4) {
+//                            Image(systemName: getTabIcon(for: index))
+//                                .font(.system(size: 20))
+//                            
+//                            Text(getTabTitle(for: index))
+//                                .font(.caption2)
+//                        }
+//                        .frame(maxWidth: .infinity)
+//                        .padding(.vertical, 8)
+//                        .foregroundColor(selectedTab == index ? Color.yellow : Color.secondary)
+//                    }
+//                }
+//            }
+//            .padding(.horizontal, 16)
+//            .padding(.top, 12)
+//            .padding(.bottom, 24)
+//            .background(
+//                RoundedRectangle(cornerRadius: 24)
+//                    .fill(Color(UIColor.systemBackground))
+//                    .shadow(color: Color.black.opacity(0.1), radius: 12, x: 0, y: -4)
+//            )
+//            .offset(y: -8)
         }
         .edgesIgnoringSafeArea(.bottom)
     }
@@ -344,6 +347,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(selection: .constant(0))
     }
 }

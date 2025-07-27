@@ -42,16 +42,40 @@ func MV(ob:VNFaceObservation){
     
     let distance = (realFaceHeight * focalLength_px) / pixelHeight
     
+    print("position: x=\(maxFace.boundingBox.origin.x), y=\(maxFace.boundingBox.origin.y)")
+    
+    let x=maxFace.boundingBox.origin.x
+    
+    let y=maxFace.boundingBox.origin.y
     
     if(distance<0.4){
+//        rAndL(y:y)
         print("a:向后")
         AppSupport.state = .back
     }else if distance>0.6{
+//        rAndL(y:y)
         print("a:向前")
         AppSupport.state = .front
+    }else{
+//        rAndL(y:y)
+//        print("a: ok")
+//        AppSupport.state = .stop
+        rAndL(y:y)
+    }
+    
+    
+    
+}
+
+func rAndL(y:Double){
+    if(y<0.3){
+        print("a:向左")
+        AppSupport.state = .left
+    }else if y>0.5{
+        print("a:向右")
+        AppSupport.state = .right
     }else{
         print("a: ok")
         AppSupport.state = .stop
     }
-    
 }

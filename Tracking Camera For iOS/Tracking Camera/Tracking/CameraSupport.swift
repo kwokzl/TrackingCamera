@@ -10,8 +10,11 @@ import Vision
 import SwiftUI
 
 class CameraSupport:NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate{
+    @Published var isRecording = false
+    @Published var lastVideoURL: URL?
     let session = AVCaptureSession()
     @Published var observation=VNFaceObservation()
+    var movieFileOutput: AVCaptureMovieFileOutput?
     private func setupCamera() {
         session.sessionPreset = .photo
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
@@ -33,6 +36,7 @@ class CameraSupport:NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     override init() {
         super.init()
         setupCamera()
+        setupCaptureSession()
         Task{
             self.session.startRunning()
         }

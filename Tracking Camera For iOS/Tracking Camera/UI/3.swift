@@ -23,32 +23,6 @@ struct RecordsView: View {
     
     var body: some View {
         VStack(spacing: 15) {
-            // 搜索框
-            HStack {
-                Image(systemName: "magnifyingglass")
-                TextField("搜索记录", text: $searchText)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
-            .padding(.horizontal)
-            
-            // 筛选按钮
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(0..<filterOptions.count, id: \.self) { index in
-                        Button(action: { selectedFilter = index }) {
-                            Text(filterOptions[index])
-                                .padding(.horizontal, 15)
-                                .padding(.vertical, 8)
-                                .background(selectedFilter == index ? Color.yellow : Color.gray.opacity(0.1))
-                                .foregroundColor(selectedFilter == index ? .white : .primary)
-                                .cornerRadius(15)
-                        }
-                    }
-                }
-                .padding(.horizontal)
-            }
             
             // 记录列表
             ScrollView {
@@ -100,6 +74,13 @@ struct RecordsView: View {
                         .padding(.horizontal)
                     }
                 }
+                .padding(.vertical,20)
+            }
+        }
+        .navigationTitle("拍摄记录")
+        .toolbar{
+            Button(action:{}){
+                Image(systemName: "plus")
             }
         }
     }

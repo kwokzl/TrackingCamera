@@ -73,9 +73,9 @@ struct TrackingView: View {
                 }
                 
                 // 天气条件
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text("天气条件").font(.headline)
-                    
+                        .frame(maxWidth:.infinity,alignment: .leading)
                     HStack {
                         ForEach(0..<weatherOptions.count, id: \.self) { index in
                             Button(action: { weatherCondition = index }) {
@@ -91,6 +91,7 @@ struct TrackingView: View {
                     .padding(.vertical, 5)
                 }
                 
+                
                 // 笔记
                 VStack(alignment: .leading) {
                     Text("笔记").font(.headline)
@@ -102,8 +103,9 @@ struct TrackingView: View {
                 }
                 
                 // 心情
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text("心情").font(.headline)
+                        .frame(maxWidth:.infinity,alignment: .leading)
                     HStack {
                         ForEach(0..<moodOptions.count, id: \.self) { index in
                             Button(action: { selectedMood = index }) {
