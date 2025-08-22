@@ -11,7 +11,7 @@ import SwiftUI
 struct Tracking_CameraApp: App {
     var body: some Scene {
         WindowGroup {
-            SwiftUIView()
+            CameraView()
         }
     }
 }

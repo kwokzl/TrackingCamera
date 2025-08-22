@@ -58,8 +58,10 @@ struct MainView: View {
                                 Image(systemName: "camera.fill")
                                     .font(.title2)
                                 
-                                Text("开始新的拍摄旅程")
-                                    .fontWeight(.medium)
+                                NavigationLink(destination: {CameraView()}){
+                                    Text("开始新的拍摄旅程")
+                                        .fontWeight(.medium)
+                                }
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
